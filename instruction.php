@@ -79,16 +79,33 @@ session_start();
                 <h3>Instruction</h3>
 
                 <p>
-                    You'll play role as a member of school admissions committee to rank four high school students according to the school's application review goal.
+                    For this task, you will roleplay as a member of an Admissions Committee for an engineering college to evaluate three high school students.
                 </p>
+
+
 
                 <p>
-                    Identify and admit a student who is fully prepared to excel in the University's challenging academic environment – a student who represents strong academic achievement, exceptional personal talent and the broad diversity of talents, abilities, personal experience, and backgrounds characteristic of California.
-
+                    Please read the information regarding the three candidates very carefully. Click <a href="https://docs.google.com/spreadsheets/d/1tXTdFMQ_VPg8Qzc5m_CFC10pN7UP3S1Xj03uPmY85CU/edit?usp=sharing" target="_blank"><b>HERE</b></a>!
                 </p>
 
 
-                <button onclick="location='turk_add.php'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <p>
+                    Hit START when you’re ready to evaluate them.
+                </p>
+
+                <br>
+
+
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <label><input name="" type="checkbox" value="" id="regText"  class="mdl-checkbox__input">I have read the instruction and opened the student information.</label>
+
+
+                </label>
+
+                <br>
+                <br>
+
+                <button onclick="location='turk_add.php'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="regBtn" disabled>
                     Start
                 </button>
 
@@ -105,6 +122,24 @@ session_start();
 <!--        </footer>-->
     </main>
 </div>
+
+
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+<script>
+
+    $(function(){
+        var regBtn = $("#regBtn");
+        $("#regText").change(function(){
+            var that = $(this);
+            that.prop("checked",that.prop("checked"));
+            if(that.prop("checked")){
+                regBtn.prop("disabled",false)
+            }else{
+                regBtn.prop("disabled",true)
+            }
+        });
+    });
+</script>
 
 
 

@@ -74,19 +74,41 @@ $real_user_id = $row['real_user_id'];
 
 
 <p style="padding-left: 10px">
-    <b>Individual Voting page:</b><br>
-    Rank the Candidates. Click and drag the colored circles onto the line<br>
-    Please click the button "Next" when you finish this page's task.
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <b>What you should do in this page?</b><br>
+    <ul>
+        <li>
+            Recall that you will evaluate three candidate students for an engineering program. <a href="https://docs.google.com/spreadsheets/d/1tXTdFMQ_VPg8Qzc5m_CFC10pN7UP3S1Xj03uPmY85CU/edit?usp=sharing" target="_blank">Student Information</a>
+        </li>
+    <li>
+        Use the scales below to rate each candidate for each aspect.
+    </li>
+    <li>
+        At the bottom, explain the reasons for your scores (using 60-100 words).
+    </li>
+    </ul>
+
+<p style="padding-left: 10px">
+    <b>How to use the visualization?</b>
+    <ul>
+        <li>
+            Each color represents a candidate (see legend on the right for further clarification).
+        </li>
+        <li>
+            Click and drag the colored circles onto the line to rate them according to the criteria.
+        </li>
+        <li>
+            The left side means the candidate is “not suitable” while the right side means the candidate is “suitable” regarding that criteria.        </li>
+        <li>
+            Check “Scale” if you want to see a more quantified view of your scores.
+        </li>
+    </ul>
 
 </p>
+<p style="padding-left: 10px">
+Hit FINISH after you finish initializing your votes on the visualization and providing your reasonings in the text box.
+</p>
+
+
 <svg id="left_side_panel"></svg>
 <svg id="main_panel"></svg>
 <div></div>
@@ -103,7 +125,8 @@ $real_user_id = $row['real_user_id'];
 <br>
 
 <div style="padding-left: 400px; margin-bottom: 30px">
-    <textarea  name="argument" placeholder="Please type your reason here..." id="argu_id_argu" onkeyup="saveA()" onkeydown="countWord()" style="width: 500px; height: 100px;"></textarea>
+
+    <textarea  name="argument" placeholder="Reasons for your scores..." id="argu_id_argu" onkeyup="saveA()" onkeydown="countWord()" style="width: 500px; height: 100px;"></textarea>
     <span id="word_counter">0</span>Words<br/>
 </div>
 
@@ -303,7 +326,7 @@ $user_num = $row['user_num'];
                             .attr("height", height)
                             .attr("width", width);
 
-                        var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Extracurricular"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Fit"}];
+                        var data1 = [{rect:0, name:"Overall"},{rect:1, name:"Academic"},{rect:2, name:"Activity"},{rect:3, name:"Recommendation Letter"},{rect:4, name:"Fit for the program"}];
 
                         var title_width = 150;
                         var rect_height = 2, rect_width=400;
@@ -844,7 +867,7 @@ $user_num = $row['user_num'];
                             .classed("checkbox", true)
                             .style("position", "absolute")
                             .style("left", 1077  + "px")
-                            .style("top", function() { return 260 + "px";})
+                            .style("top", function() { return 400 + "px";})
                             .append('input')
                             .attr('type','checkbox')
                             .property("checked", false);
@@ -1143,7 +1166,8 @@ $user_num = $row['user_num'];
         var argu_id_argu=document.getElementById("argu_id_argu").value;
 
         arguSave = argu_id_argu.replace(/\n/g, "<br/>");
-
+        arguSave = arguSave.replace(/'/g, "pp");
+        arguSave = arguSave.replace(/"/g, "ll");
 
 
 
@@ -1176,12 +1200,26 @@ $user_num = $row['user_num'];
         var numm = s.split(' ').length;
 
 
-        if(numm >= 60){
-            if(confirm("Are you sure you want to finish the task?")){
-                window.location.href='almostdone.php?user_id=<?php echo $_GET['user']?>';
+        var flag = 0;
+
+
+        if(scores[0][1]>0 && scores[0][2]>0 && scores[0][3]>0){
+            flag = 1;
+        }
+
+
+
+        if(numm >= 60 && numm <=100){
+            if(flag == 1){
+                if(confirm("Are you sure you want to finish the task?")){
+                    window.location.href='almostdone.php?user_id=<?php echo $_GET['user']?>';
+                }
+            }else{
+                alert("Make sure to provide a score for every candidate for every criteria.");
             }
+
         }else{
-            alert("More Words Please");
+            alert("Your reasons behind your scores should be between 60-100 words.");
         }
 
     }

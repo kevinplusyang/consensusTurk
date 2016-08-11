@@ -20,7 +20,7 @@ if(isset($_SESSION['decision_id'])){
             echo "Pass Code:";
             echo $num;
         }else{
-            echo "I'll not pay you twice.";
+            echo "Please do not reuse the system.";
         }
 
 
@@ -29,7 +29,7 @@ if(isset($_SESSION['decision_id'])){
 
 
     }else{
-        echo "Don't play around!";
+        echo "Wrong Link";
     }
 }else{
     echo "Finish the task first!";
