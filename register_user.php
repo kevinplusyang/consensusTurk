@@ -26,16 +26,20 @@ echo $_POST['password'];
 echo $_POST['participate'];
 
 
-mysql_query("insert into user values ('','".$_POST['username']."','".$_POST['email']."','".md5($_POST['password'])."') ");
+$username = mysql_real_escape_string($_POST['username']);
+$email = mysql_real_escape_string($_POST['email']);
+$password = md5($_POST['password']);
+
+mysql_query("insert into user values ('','".$username."','".$email."','".$password."') ");
 
 
-$result = mysql_query("select * from user where email = '".$_POST['email']."' ");
+$result = mysql_query("select * from user where email = '".$email."' ");
 $row = mysql_fetch_array($result);
 $user_id = $row['id'];
 
 
 
-$decision_id = $_POST['participate'];
+$decision_id = mysql_real_escape_string($_POST['participate']);
 
 $sql_count = "select count(*) from participate where decision_id = '".$decision_id."' ";
 $result_count = mysql_query($sql_count);
