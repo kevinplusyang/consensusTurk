@@ -13,8 +13,8 @@ require_once "dbaccess.php";
 <body>
 
 <?php
-echo $_POST['invitation_code'];
-$decision_id = $_POST['invitation_code'];
+echo mysql_real_escape_string($_POST['invitation_code']);
+$decision_id = mysql_real_escape_string($_POST['invitation_code']);
 
 $sql_count = "select count(*) from participate where decision_id = '".$decision_id."' ";
 $result_count = mysql_query($sql_count);

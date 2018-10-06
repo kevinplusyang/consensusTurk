@@ -101,12 +101,12 @@ session_start();
 
 <?php
 
-if(isset($_POST['email'])){
+if(isset(mysql_real_escape_string($_POST['email']))){
     require_once "dbaccess.php";
-    mysql_query("insert into user values ('' ,'".$_POST['Name']."','".$_POST['email']."',md5('".$_POST['password']."'));");
-    $username = $_POST['Name'];
+    mysql_query("insert into user values ('' ,'".mysql_real_escape_string($_POST['Name'])."','".mysql_real_escape_string($_POST['email'])."',md5('".mysql_real_escape_string($_POST['password'])."'));");
+    $username = mysql_real_escape_string($_POST['Name']);
 
-    $id_result = mysql_query("select * from user where email = '".$_POST['email']."'");
+    $id_result = mysql_query("select * from user where email = '".mysql_real_escape_string($_POST['email'])."'");
     $id_row = mysql_fetch_array($id_result);
     $user_id = $id_row[id];
 

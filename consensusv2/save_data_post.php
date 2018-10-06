@@ -19,8 +19,8 @@
 
 <?php
 require_once "dbaccess.php";
-$data = json_decode(stripslashes($_POST['trans_data']));
-//$data=$_POST['trans_data'];
+$data = json_decode(stripslashes(mysql_real_escape_string($_POST['trans_data'])));
+//$data=mysql_real_escape_string($_POST['trans_data']);
 $result = mysql_query("select * from decision where id = '".$_GET['decision_id']."'");
 $row = mysql_fetch_array($result);
 $criteria_num =$row['criteria_num'];

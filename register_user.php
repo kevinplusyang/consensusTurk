@@ -20,22 +20,22 @@
 require_once "dbaccess.php";
 
 
-echo $_POST['username'];
-echo $_POST['email'];
-echo $_POST['password'];
-echo $_POST['participate'];
+echo mysql_real_escape_string($_POST['username']);
+echo mysql_real_escape_string($_POST['email']);
+echo mysql_real_escape_string($_POST['password']);
+echo mysql_real_escape_string($_POST['participate']);
 
 
-mysql_query("insert into user values ('','".$_POST['username']."','".$_POST['email']."','".md5($_POST['password'])."') ");
+mysql_query("insert into user values ('','".mysql_real_escape_string($_POST['username'])."','".mysql_real_escape_string($_POST['email'])."','".md5(mysql_real_escape_string($_POST['password']))."') ");
 
 
-$result = mysql_query("select * from user where email = '".$_POST['email']."' ");
+$result = mysql_query("select * from user where email = '".mysql_real_escape_string($_POST['email'])."' ");
 $row = mysql_fetch_array($result);
 $user_id = $row['id'];
 
 
 
-$decision_id = $_POST['participate'];
+$decision_id = mysql_real_escape_string($_POST['participate']);
 
 $sql_count = "select count(*) from participate where decision_id = '".$decision_id."' ";
 $result_count = mysql_query($sql_count);

@@ -26,10 +26,10 @@ session_start();
 require_once "dbaccess.php";
 
 //
-//echo $_POST['password'];
-//echo $_POST['email'];
+//echo mysql_real_escape_string($_POST['password']);
+//echo mysql_real_escape_string($_POST['email']);
 
-$sql_count = "select count(*) from user where email = '".$_POST['email']."' and password=md5('".$_POST['password']."') ";
+$sql_count = "select count(*) from user where email = '".mysql_real_escape_string($_POST['email'])."' and password=md5('".mysql_real_escape_string($_POST['password'])."') ";
 $result_count = mysql_query($sql_count);
 $row_count = mysql_fetch_array( $result_count );
 if($row_count[0]==0) {
@@ -40,7 +40,7 @@ if($row_count[0]==0) {
     <?php
 
 }else{
-    $result = mysql_query("select * from user where email = '".$_POST['email']."' and password=md5('".$_POST['password']."') ");
+    $result = mysql_query("select * from user where email = '".mysql_real_escape_string($_POST['email'])."' and password=md5('".mysql_real_escape_string($_POST['password'])."') ");
     $row = mysql_fetch_array($result);
     $username = $row['user_name'];
     $email = $row['email'];
