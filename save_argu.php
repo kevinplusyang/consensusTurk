@@ -19,7 +19,7 @@
 
 <?php
 require_once "dbaccess.php";
-$data = json_decode(stripslashes($_POST['trans_data']));
+$data = json_decode(stripslashes(mysql_real_escape_string($_POST['trans_data'])));
 
 mysql_query("update argument set argument = '".$data."' where decision_id = '".$_GET['decision_id']."' ");
 

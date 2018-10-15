@@ -20,9 +20,9 @@
 require_once "dbaccess.php";
 
 
-mysql_query("insert into decision values ('', '".$_POST['studyname']."', '".$_POST['description']."', '1', '4','3','0','".$_POST['group_type']."')");
+mysql_query("insert into decision values ('', '".mysql_real_escape_string($_POST['studyname'])."', '".mysql_real_escape_string($_POST['description'])."', '1', '4','3','0','".mysql_real_escape_string($_POST['group_type'])."')");
 
-$result = mysql_query("select * from decision where name = '".$_POST['studyname']."' ");
+$result = mysql_query("select * from decision where name = '".mysql_real_escape_string($_POST['studyname'])."' ");
 $row = mysql_fetch_array($result);
 $decision_id = $row['id'];
 

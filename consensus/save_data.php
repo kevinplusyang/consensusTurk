@@ -20,9 +20,9 @@
 <?php
 
 require_once "dbaccess.php";
-$data = json_decode(stripslashes($_POST['trans_data']));
+$data = json_decode(stripslashes(mysql_real_escape_string($_POST['trans_data'])));
 
-//$data=$_POST['trans_data'];
+//$data=mysql_real_escape_string($_POST['trans_data']);
 
 
 
